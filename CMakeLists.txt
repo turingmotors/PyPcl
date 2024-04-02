@@ -10,4 +10,4 @@ find_package(PythonExtensions REQUIRED)
 find_package(Cython REQUIRED)
 find_package(PCL REQUIRED)
 
-add_subdirectory(pointclouds)
+add_subdirectory(pypcl)

@@ -5,6 +5,6 @@ setup(
     version="0.0.1",
     description="minimal python wrapper for pcl",
     author="hiroyuki shimatani",
-    packages=["pointclouds"],
+    packages=["pypcl"],
     python_requires=">=3.7",
 )

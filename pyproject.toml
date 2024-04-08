@@ -1,7 +1,7 @@
  [tool.poetry]
 name = "pcl-python"
 version = "0.1.0"
-description = ""
+description = "Point Cloud Library for Python"
 authors = ["emanuere <smtn10hryk28@gmail.com>"]
 readme = "README.md"
 

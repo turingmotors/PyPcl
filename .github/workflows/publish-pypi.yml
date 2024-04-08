@@ -2,9 +2,7 @@ name: Build and Upload Python Wheels to PyPI
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    types: [ opened, reopened, synchronize]
+    branches: [ main, feat/auto-build-publish ]
 
 jobs:
   release-build:

@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        python-version: [3.11]
+        python-version: [3.11, 3.12]
         architecture: [x86_64, arm64]
     permissions:
       id-token: write

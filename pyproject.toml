@@ -1,5 +1,5 @@
  [tool.poetry]
-name = "PyPcl"
+name = "pcl-python"
 version = "0.1.0"
 description = ""
 authors = ["emanuere <smtn10hryk28@gmail.com>"]

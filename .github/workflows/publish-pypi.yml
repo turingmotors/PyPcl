@@ -1,0 +1,65 @@
+name: Publish Python 🐍 distribution 📦 to PyPI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: [3.11, 3.12]
+        architecture: [x86_64, arm64]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'poetry'
+
+      - name: Install libpcl-dev
+        run: sudo apt-get install -y libpcl-dev
+
+      - name: Install poetry
+        run: pipx install poetry
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Build wheels
+        run: |
+          if [ "${{ matrix.architecture }}" = "arm64" ]; then
+            poetry run python setup.py bdist_wheel --plat-name=linux_aarch64
+          else
+            poetry run python setup.py bdist_wheel
+          fi
+
+      - name: Upload Wheels
+        uses: actions/upload-artifact@v4
+        with:
+          name: pypcl-${{ matrix.python-version }}-${{ matrix.architecture }}
+          path: dist/
+
+  publish:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: [3.11, 3.12]
+        architecture: [x86_64, arm64]
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Download all the dists
+        uses: actions/download-artifact@v4
+        with:
+          name: pypcl-${{ matrix.python-version }}-${{ matrix.architecture }}
+          path: dist/
+
+      - name: Publish distribution 📦 to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

@@ -22,6 +22,14 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
+      - name: Cache apt packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt/archives
+          key: ${{ runner.os }}-apt-cache-${{ hashFiles('**/packages.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-cache-
+
       - name: Install libpcl
         run: sudo apt-get update && sudo apt-get install -y libpcl-dev
 

@@ -48,10 +48,6 @@ jobs:
   publish:
     needs: build
     runs-on: ubuntu-22.04
-    strategy:
-      matrix:
-        python-version: [3.11, 3.12]
-        architecture: [x86_64, arm64]
     permissions:
       id-token: write
       contents: read
@@ -59,7 +55,6 @@ jobs:
       - name: Download all the dists
         uses: actions/download-artifact@v4
         with:
-          name: pypcl-${{ matrix.python-version }}-${{ matrix.architecture }}
           path: dist/
 
       - name: Publish distribution 📦 to PyPI

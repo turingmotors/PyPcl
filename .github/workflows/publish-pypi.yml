@@ -13,6 +13,9 @@ jobs:
       matrix:
         python-version: [3.11]
         architecture: [x86_64, arm64]
+    permissions:
+      id-token: write
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -42,31 +45,11 @@ jobs:
       - name: Build wheels
         run: poetry run python setup.py bdist_wheel
 
-      - name: upload windows dists
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-dists
-          path: dist/
-
     #- name: Upload wheels to PyPI
     #  env:
     #    TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
     #    TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
     #  run: poetry run twine upload dist/*
-
-  pypi-publish:
-    runs-on: ubuntu-22.04
-    needs:
-      - release-build
-    permissions:
-      id-token: write
-
-    steps:
-      - name: Retrieve release distributions
-        uses: actions/download-artifact@v4
-        with:
-          name: release-dists
-          path: dist/
 
       - name: Publish release distributions to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1

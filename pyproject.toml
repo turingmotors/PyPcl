@@ -1,13 +1,10 @@
 [tool.poetry]
-name = "pcl-python"
+name = "pypcl"
 version = "0.1.0"
 description = "Point Cloud Library for Python"
 authors = ["emanuere <smtn10hryk28@gmail.com>"]
 license = "Apatch License 2.0"
 readme = "README.md"
-packages = [
-    { include = "pypcl", from = "." },
-]
 
 [tool.poetry.dependencies]
 python = "^3.11"

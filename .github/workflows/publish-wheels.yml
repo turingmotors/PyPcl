@@ -3,6 +3,10 @@ name: Build and Upload Python Wheels to S3
 on:
   push:
     branches: [ main ]
+    paths:
+      - 'pypcl/**'
+      - 'pyproject.toml'
+      - '.github/workflows/publish-wheels.yml'
 
 jobs:
   release-build:

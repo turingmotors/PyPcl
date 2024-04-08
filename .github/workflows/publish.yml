@@ -12,6 +12,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.11]
+        architecture: [x86_64, arm64]
 
     steps:
     - uses: actions/checkout@v4
@@ -37,5 +38,4 @@ jobs:
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-      run: |
-        twine upload dist/*
+      run: poetry run twine upload dist/*

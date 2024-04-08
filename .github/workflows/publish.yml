@@ -21,6 +21,9 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
 
+    - name: Install libpcl
+      run: sudo apt-get update && sudo apt-get install libpcl-dev
+
     - name: Install poetry
       run: pipx install poetry
 

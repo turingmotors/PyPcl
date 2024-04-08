@@ -8,13 +8,19 @@
 pip install https://d2p2mp26w3f0s0.cloudfront.net/pypcl/PyPcl-0.0.1-cp311-cp311-linux_x86_64.whl
 ```
 
+#### x86_64
+
 | Python | Arch | wheel url |
 |:--|:--|:--|
 | 3.11 | x86_64 | https://d2p2mp26w3f0s0.cloudfront.net/pypcl/PyPcl-0.0.1-cp311-cp311-linux_x86_64.whl |
 | 3.12 | x86_64 | https://d2p2mp26w3f0s0.cloudfront.net/pypcl/PyPcl-0.0.1-cp312-cp312-linux_x86_64.whl |
+
+#### aarch64
+
+| Python | Arch | wheel url |
+|:--|:--|:--|
 | 3.11 | aarch64 | https://d2p2mp26w3f0s0.cloudfront.net/pypcl/PyPcl-0.0.1-cp311-cp311-linux_aarch64.whl |
 | 3.12 | aarch64 | https://d2p2mp26w3f0s0.cloudfront.net/pypcl/PyPcl-0.0.1-cp312-cp312-linux_aarch64.whl |
-
 
 # How to setup [WIP]
 

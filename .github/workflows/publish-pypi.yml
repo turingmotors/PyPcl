@@ -16,17 +16,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: 'poetry'
-
       - name: Install libpcl-dev
         run: sudo apt-get install -y libpcl-dev
 
       - name: Install poetry
         run: pipx install poetry
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'poetry'
 
       - name: Install dependencies
         run: poetry install
@@ -46,6 +46,7 @@ jobs:
           path: dist/
 
   publish:
+    needs: build
     runs-on: ubuntu-22.04
     strategy:
       matrix:

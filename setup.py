@@ -6,5 +6,5 @@ setup(
     description="minimal python wrapper for pcl",
     author="hiroyuki shimatani",
     packages=["pypcl"],
-    python_requires=">=3.7",
+    python_requires=">=3.11",
 )

@@ -1,0 +1,60 @@
+name: Build and Upload Python Wheels to S3
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  release-build:
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: [3.11, 3.12]
+        architecture: [x86_64, arm64]
+    permissions:
+      id-token: write
+      contents: read
+    env:
+      BUCKET_NAME: tuscenes-assets-767397804933
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache apt packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt/archives
+          key: ${{ runner.os }}-apt-cache-${{ hashFiles('**/packages.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-cache-
+
+      - name: Install libpcl
+        run: sudo apt-get update && sudo apt-get install -y libpcl-dev
+
+      - name: Install poetry
+        run: pipx install poetry
+
+      - name: Install dependencies
+        run: poetry install
+
+      - name: Build wheels
+        run: |
+          if [ "${{ matrix.architecture }}" = "arm64" ]; then
+            poetry run python setup.py bdist_wheel --plat-name=linux_aarch64
+          else
+            poetry run python setup.py bdist_wheel
+          fi
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::767397804933:role/tuscenes-AssetsBucketGitHubActionsRoleE4BAEB76-beN590ByVHCx
+          aws-region: us-west-2
+
+      - name: Sync to S3
+        run: aws s3 sync ./dist/ s3://${{ env.BUCKET_NAME }}/pypcl/ --acl public-read

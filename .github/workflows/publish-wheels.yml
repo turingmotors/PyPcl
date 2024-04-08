@@ -1,4 +1,4 @@
-name: Build and Upload Python Wheels to PyPI
+name: Build and Upload Python Wheels to S3
 
 on:
   push:

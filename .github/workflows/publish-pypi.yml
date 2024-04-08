@@ -42,7 +42,7 @@ jobs:
       - name: Upload Wheels
         uses: actions/upload-artifact@v4
         with:
-          name: pypcl-${{ matrix.python-version }}-${{ matrix.architecture }}.zip
+          name: pypcl-${{ matrix.python-version }}-${{ matrix.architecture }}
           path: dist/
 
   publish:
@@ -56,6 +56,10 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           path: dist/
+          merge-multiple: true
+
+      - name: Display structure of downloaded files
+        run: ls -R ./dist
 
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1

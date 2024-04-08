@@ -7,7 +7,7 @@ on:
     types: [ opened, reopened, synchronize]
 
 jobs:
-  build-and-upload:
+  release-build:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
@@ -34,8 +34,25 @@ jobs:
     - name: Build wheels
       run: poetry run python setup.py bdist_wheel
 
-    - name: Upload wheels to PyPI
-      env:
-        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-      run: poetry run twine upload dist/*
+    #- name: Upload wheels to PyPI
+    #  env:
+    #    TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+    #    TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+    #  run: poetry run twine upload dist/*
+
+  pypi-publish:
+    runs-on: ubuntu-22.04
+    needs:
+      - release-build
+    permissions:
+      id-token: write
+
+    steps:
+      - name: Retrieve release distributions
+        uses: actions/download-artifact@v4
+        with:
+          name: release-dists
+          path: dist/
+
+      - name: Publish release distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1

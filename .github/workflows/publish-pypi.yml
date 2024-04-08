@@ -44,10 +44,10 @@ jobs:
 
       - name: Build wheels
         run: |
-          if [ "${{ matrix.architecture }}" = "x86_64" ]; then
-            poetry run python setup.py bdist_wheel
-          elif [ "${{ matrix.architecture }}" = "arm64" ]; then
+          if [ "${{ matrix.architecture }}" = "arm64" ]; then
             poetry run python setup.py bdist_wheel --plat-name=linux_aarch64
+          else
+            poetry run python setup.py bdist_wheel
           fi
 
       - name: Configure AWS credentials

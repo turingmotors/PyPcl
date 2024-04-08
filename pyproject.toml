@@ -15,9 +15,6 @@ setuptools = "^69.2.0"
 tqdm = "^4.66.2"
 numpy = "^1.26.4"
 
-[tool.poetry.group.dev.dependencies]
-twine = "^5.0.0"
-
 [build-system]
 requires = [
     "setuptools>=42",

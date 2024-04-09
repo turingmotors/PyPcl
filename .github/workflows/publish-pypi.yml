@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        python-version: [3.11]
-        architecture: [x86_64, arm64]
+        python_version: [3.11, 3.12]
+        architecture: [x86_64]
     steps:
       - uses: actions/checkout@v4
 
@@ -22,10 +22,10 @@ jobs:
       - name: Install poetry
         run: pipx install poetry
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python_version }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: ${{ matrix.python_version }}
           cache: 'poetry'
 
       - name: Install dependencies
@@ -37,7 +37,7 @@ jobs:
       - name: Upload Wheels
         uses: actions/upload-artifact@v4
         with:
-          name: pypcl-${{ matrix.python-version }}-${{ matrix.architecture }}
+          name: pypcl-${{ matrix.python_version }}-${{ matrix.architecture }}
           path: dist/
 
   publish:

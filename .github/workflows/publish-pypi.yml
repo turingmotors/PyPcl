@@ -32,7 +32,7 @@ jobs:
         run: poetry install
 
       - name: Build wheels
-        run: poetry run python setup.py bdist_wheel --plat-name=manylinux2014_x86_64
+        run: poetry build
 
       - name: Upload Wheels
         uses: actions/upload-artifact@v4

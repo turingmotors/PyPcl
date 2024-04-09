@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pcl-python"
-version = "0.1.0"
+version = "0.0.3"
 description = "Point Cloud Library for Python"
 authors = ["emanuere <smtn10hryk28@gmail.com>"]
 license = "Apatch License 2.0"
@@ -21,6 +21,10 @@ numpy = "^1.26.4"
 
 [tool.poetry.group.dev.dependencies]
 licensecheck = "^2024.2"
+
+[tool.poetry.build]
+generate-setup-file = true
+script = "build.py"
 
 [build-system]
 requires = [

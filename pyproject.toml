@@ -1,9 +1,13 @@
- [tool.poetry]
-name = "PyPcl"
-version = "0.1.0"
-description = ""
+[tool.poetry]
+name = "pcl-python"
+version = "0.0.4"
+description = "Point Cloud Library for Python"
 authors = ["emanuere <smtn10hryk28@gmail.com>"]
+license = "Apatch License 2.0"
 readme = "README.md"
+packages = [
+    { include = "pypcl", from = "." },
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -14,6 +18,14 @@ scikit-build = "^0.17.6"
 setuptools = "^69.2.0"
 tqdm = "^4.66.2"
 numpy = "^1.26.4"
+build = "^1.2.1"
+
+[tool.poetry.group.dev.dependencies]
+licensecheck = "^2024.2"
+
+[tool.poetry.build]
+generate-setup-file = true
+script = "build.py"
 
 [build-system]
 requires = [

@@ -16,3 +16,4 @@ _skbuild/
 *.os-*
 *.so
 *.a
+dist/*

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pcl-python"
-version = "0.0.3"
+version = "0.0.4"
 description = "Point Cloud Library for Python"
 authors = ["emanuere <smtn10hryk28@gmail.com>"]
 license = "Apatch License 2.0"

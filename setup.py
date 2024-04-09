@@ -1,6 +1,4 @@
-import os
 from pathlib import Path
-import sys
 
 from skbuild import setup
 
@@ -23,6 +21,5 @@ setup(
         "Intended Audience :: Developers",
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: POSIX :: Linux",
-        f"Architecture :: {os.uname().machine}",
     ],
 )

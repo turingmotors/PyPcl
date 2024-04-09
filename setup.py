@@ -23,7 +23,7 @@ else:
 setup(
     name="pcl-python",
     packages=["pypcl"],
-    version="0.0.1",
+    version="0.0.2",
     description="Point Cloud Library for Python",
     long_description=long_description,
     long_description_content_type='text/markdown',
